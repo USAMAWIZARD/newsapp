@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+dd
+<div align="center" id="article"><a href=# class="style15">IEEE Projects</a></div>
+     <script type="text/javascript"> 
+     	{% for keys,values in userintrustedpages.items %}
+     	{%for item in values %}
+               document.getElementById("article").innerHTML='<object type="text/html" data="entertainment/test.html" ></object>';
+ 		{% endfor %}
+        {% endfor %}
+        </script> 
+</html>
