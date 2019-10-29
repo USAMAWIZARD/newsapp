@@ -3,6 +3,8 @@ from .models import user,admin
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 import os
+from django.conf import settings
+
 def getUserIntrustedPage(requser):
 	#obj = user.objects.filter(name=requser)
 	listofuserinterst=user.objects.values_list('selectedfields', flat=True).get(name=requser)
@@ -10,7 +12,7 @@ def getUserIntrustedPage(requser):
 	listofuserinterst=res = listofuserinterst.strip("']['").split(', ') 
 	allintrestedpagedic={}
 	for interst in listofuserinterst:		
-		allintrestedpagedic[interst]=os.listdir("C:/Users/USAMAWIZARD/Desktop/New folder/newsfeed/newsapp/templates/"+ interst.replace("'",""))
+		allintrestedpagedic[interst]=os.listdir("C:/Users/USAMAWIZARD/Desktop/New folder/newsfeed/"+ interst.replace("'",""))
 	print(allintrestedpagedic)
 	return allintrestedpagedic
 def getallcatfunc():
@@ -22,6 +24,7 @@ def signup(request):
 def signin(request):
 	return render(request,"signin.html")
 def signupdata(request):
+
 	userobj=user()
 	#print(request.POST.getlist('selectedfields'))
 	userobj.name=request.POST['name']
@@ -29,7 +32,7 @@ def signupdata(request):
 	userobj.save()
 	userintrustedpages=getUserIntrustedPage(request.POST['name'])
 	print("last me ho mai")
-	return render(request,'UserIntrustedPage.html/',{'userintrustedpages':userintrustedpages})
+	return render(request,'userintrustedpages.html',{'userintrustedpages':userintrustedpages})
 def admincontroll(request):
 	return render(request,"admincontroll.html",{'allcat':getallcatfunc()})
 def addcat(request):
@@ -37,7 +40,10 @@ def addcat(request):
 	#list(admin.objects.values_list('availablecat',flat=True))
 	#lis.append(request.POST['addcat'])
 	adminobj.availablecat=request.POST['addcat']
-	os.mkdir("C:\\Users\\USAMAWIZARD\\Desktop\\New folder\\newsfeed\\newsapp\\templates\\"+ request.POST['addcat'])
 	adminobj.save()
+	try:
+		os.mkdir("C:\\Users\\USAMAWIZARD\\Desktop\\New folder\\newsfeed\\"+ request.POST['addcat'])
+	except:
+		pass
 	#print(lis)
 	return render(request,"admincontroll.html")
