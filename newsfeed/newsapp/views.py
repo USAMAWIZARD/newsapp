@@ -12,7 +12,7 @@ def getUserIntrustedPage(requser):
 	listofuserinterst=res = listofuserinterst.strip("']['").split(', ') 
 	allintrestedpagedic={}
 	for interst in listofuserinterst:		
-		allintrestedpagedic[interst]=os.listdir("C:/Users/USAMAWIZARD/Desktop/New folder/newsfeed/"+ interst.replace("'",""))
+		allintrestedpagedic[interst]=os.listdir("C:/Users/USAMAWIZARD/Desktop/New folder/newsfeed/cat/"+ interst.replace("'",""))
 	print(allintrestedpagedic)
 	return allintrestedpagedic
 def getallcatfunc():
@@ -42,7 +42,7 @@ def addcat(request):
 	adminobj.availablecat=request.POST['addcat']
 	adminobj.save()
 	try:
-		os.mkdir("C:\\Users\\USAMAWIZARD\\Desktop\\New folder\\newsfeed\\"+ request.POST['addcat'])
+		os.mkdir("C:\\Users\\USAMAWIZARD\\Desktop\\New folder\\newsfeed\\cat\\"+ request.POST['addcat'])
 	except:
 		pass
 	#print(lis)

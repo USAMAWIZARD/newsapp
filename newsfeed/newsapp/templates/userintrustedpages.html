@@ -7,11 +7,13 @@
 
 ddss
 <div align="center" id="article"><a href=# class="style15">IEEE Projects</a></div>
-     <script type="text/javascript"> 
+
+  <script type="text/javascript"> 
      	{% for keys,values in userintrustedpages.items %}
      	{%for item in values %}
-               document.getElementById("article").innerHTML='<object type="text/html" data="/static/911.html" ></object>';
+               document.getElementById("article").innerHTML.insertAdjacentHTML='<object type="text/html" data="/static/{{ keys|safe }}/{{ item|safe }}"></object>';
  		{% endfor %}
         {% endfor %}
-        </script> 
+  </script> 
+  
 </html>
